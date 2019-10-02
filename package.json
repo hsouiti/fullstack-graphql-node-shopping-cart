@@ -1,0 +1,29 @@
+{
+  "name": "fullstack-graphql-node-shopping-cart",
+  "version": "1.0.0",
+  "description": "fullstack graphql node- shopping cart",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hsouiti/fullstack-graphql-node-shopping-cart.git"
+  },
+  "keywords": [
+    "graphql",
+    "apollo",
+    "nodejs",
+    "react",
+    "mongodb",
+    "express",
+    "shopping",
+    "cart"
+  ],
+  "author": "Hassan Souiti",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hsouiti/fullstack-graphql-node-shopping-cart/issues"
+  },
+  "homepage": "https://github.com/hsouiti/fullstack-graphql-node-shopping-cart#readme"
+}
