@@ -9,12 +9,10 @@ const resolvers = require('./graphql/resolvers');
 process.env.NODE_ENV === 'development'
   ? process.env.MONGODB_CONNECTION = process.env.MONGODB_LOCAL
   : process.env.MONGODB_CONNECTION = process.env.MONGODB_URI;
-console.log(process.env.MONGODB_CONNECTION);
 
 (async () => {
-  try { 
+  try {
     mongoose.connect(process.env.MONGODB_CONNECTION, { useNewUrlParser: true })
-    console.log('connected');
     const server = new ApolloServer({
       typeDefs,
       resolvers,
