@@ -27,7 +27,6 @@ const userSchema = new Schema({
 }, { timestamps: true }
 )
 
-
 userSchema.statics.isUnique = async function (option) {
   return await this.where(option).countDocuments() === 0
 }
@@ -35,7 +34,6 @@ userSchema.statics.isUnique = async function (option) {
 userSchema.methods.comparePassword = function (password) {
   return bcrypt.compare(password, this.password)
 }
-
 
 const User = model('User', userSchema)
 module.exports = User

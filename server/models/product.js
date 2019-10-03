@@ -1,10 +1,15 @@
+const mongoose = require('mongoose')
 const { Schema, model } = require('mongoose')
 
 const productSchema = new Schema({
   name: {
-    type: String
+    type: String,
+    required: [true, 'Name is required']
   },
-  description: String,
+  description: {
+    type: String,
+    required: [true, 'Description is required']
+  },
   image: {
     type: String
   },

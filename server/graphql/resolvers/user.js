@@ -16,7 +16,7 @@ module.exports = {
       try {
         return await User.find({}).sort({ createdAt: -1 })
       } catch (err) {
-        console.log(err)
+        throw new UserInputError(err)
       }
     }
   },
