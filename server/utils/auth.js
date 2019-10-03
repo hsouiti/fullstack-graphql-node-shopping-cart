@@ -54,10 +54,6 @@ module.exports.isLoggedIn = (req) => {
 }
 
 
-
-
-
-
 module.exports.loggedIn = async ({ email, password }) => {
   const errMessage = 'Incorrect email or password!'
 

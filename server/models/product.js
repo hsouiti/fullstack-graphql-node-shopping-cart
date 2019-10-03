@@ -9,10 +9,12 @@ const productSchema = new Schema({
     type: String
   },
   price: Number,
-  stock: Number
+  category: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Category'
+  }
 
 }, { timestamps: true })
-
 
 
 module.exports = model('Product', productSchema)
