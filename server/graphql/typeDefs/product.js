@@ -16,6 +16,8 @@ module.exports = gql`
     description: String!
     price: Float!
     image: String    
+    createdAt: String!
+    updatedAt: String!
   }
 
   input ProductFields {
@@ -23,10 +25,7 @@ module.exports = gql`
     description: String!
     price: Float!
     image: String    
+    category: ID!
   }
 
-  type Category {
-    id: ID!
-    name: String!
-  }
 `
