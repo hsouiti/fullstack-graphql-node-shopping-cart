@@ -18,6 +18,12 @@ module.exports = {
     addProduct: async (_, { productFields }, { req }) => {
       const product = await Product.create({ ...productFields })
       return product
-    }
+    }/* ,
+    updateProduct: async (_, { id }) => {
+
+    },
+    deleteProduct: async (_, { id }) => {
+
+    } */
   }
 }

@@ -24,6 +24,7 @@ module.exports = gql`
     name: String!
     role: String!
     createdAt: String!
+    updatedAt: String!
   }
 
   input SignupFields {
