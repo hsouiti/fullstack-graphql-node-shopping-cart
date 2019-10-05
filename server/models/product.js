@@ -4,7 +4,11 @@ const { Schema, model } = require('mongoose')
 const productSchema = new Schema({
   name: {
     type: String,
-    required: [true, 'Name is required']
+    required: [true, 'Name is required'],
+    validate: {
+      validator: name => Product.isUnique({ name }),
+      message: 'Product already exists'
+    }
   },
   description: {
     type: String,
@@ -25,4 +29,9 @@ const productSchema = new Schema({
 }, { timestamps: true })
 
 
-module.exports = model('Product', productSchema)
+productSchema.statics.isUnique = async function (value) {
+  return await this.where(value).countDocuments() === 0
+}
+
+const Product = model('Product', productSchema)
+module.exports = Product
