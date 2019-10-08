@@ -8,6 +8,8 @@ module.exports = gql`
 
   extend type Mutation {
     addProduct(productFields: ProductFields): Product!
+    updateProduct(id: ID!): Product!
+    deleteProduct(id: ID!): String
   }
 
   extend type Subscription {
