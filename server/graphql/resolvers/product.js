@@ -18,24 +18,29 @@ module.exports = {
   },
 
   Mutation: {
-    addProduct: async (_, { productFields }, { pubsub }) => {
+    addProduct: async (_, { productFields }) => {
       const product = await Product.create({ ...productFields })
-
       await Category.findOneAndUpdate(
         { _id: product.category },
         { "$addToSet": { products: product._id } },
         (err, model) => {
-          if (err) console.log(err)
+          if (err) console.log(err.message)
           return model
         }
       )
       return product
     }/* ,
+
     updateProduct: async (_, { id }) => {
-
+      const product = await Product.findById(id)
+      console.log(product)
+      return product
     },
-    deleteProduct: async (_, { id }) => {
 
+    deleteProduct: async (_, { id }) => {
+      const product = await Product.findByIdAndRemove(id, err => {
+        if (err) console.log(err)
+      })
     } */
   }
 }
