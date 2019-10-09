@@ -2,12 +2,16 @@ const { gql } = require('apollo-server-express')
 
 module.exports = gql`
   extend type Query {
-    getProduct(id: ID!): Product
+    getProduct(id: ID!): Product!
     getProducts: [Product!]!   
   }   
 
   extend type Mutation {
     addProduct(productFields: ProductFields): Product!
+  }
+
+  extend type Subscription {
+    newProduct: Product!
   }
 
   type Product {
@@ -16,6 +20,7 @@ module.exports = gql`
     description: String!
     price: Float!
     image: String    
+    category: Category!
     createdAt: String!
     updatedAt: String!
   }
@@ -27,5 +32,4 @@ module.exports = gql`
     image: String    
     category: ID!
   }
-
 `
