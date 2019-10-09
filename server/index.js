@@ -1,10 +1,11 @@
 const express = require('express')
-const { ApolloServer, gql } = require('apollo-server-express')
+const { ApolloServer, gql, PubSub } = require('apollo-server-express')
 const mongoose = require('mongoose')
 require('dotenv').config()
 
 const typeDefs = require('./graphql/typeDefs')
 const resolvers = require('./graphql/resolvers');
+const pubsub = new PubSub()
 
 process.env.NODE_ENV === 'development'
   ? process.env.MONGODB_CONNECTION = process.env.MONGODB_LOCAL
@@ -12,11 +13,16 @@ process.env.NODE_ENV === 'development'
 
 (async () => {
   try {
-    mongoose.connect(process.env.MONGODB_CONNECTION, { useNewUrlParser: true , useUnifiedTopology: true })
+    mongoose.connect(process.env.MONGODB_CONNECTION,
+      { 
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false 
+      })
     const server = new ApolloServer({
       typeDefs,
       resolvers,
-      context: ({ req }) => ({ req })
+      context: ({ req }) => ({ req, pubsub })
     })
 
     const app = express()

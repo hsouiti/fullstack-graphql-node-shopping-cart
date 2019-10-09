@@ -13,6 +13,7 @@ module.exports = gql`
   type Category {
     id: ID!
     name: String!
+    products: [Product!]!
   }
 
   input CategoryFields {
