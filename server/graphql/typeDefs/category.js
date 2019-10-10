@@ -8,6 +8,8 @@ module.exports = gql`
 
   extend type Mutation {
     addCategory(categoryFields: CategoryFields): Category!
+    updateCategory(id: ID!, categoryFields: CategoryFields): Category!
+    deleteCategory(id: ID!): String
   }
 
   type Category {
