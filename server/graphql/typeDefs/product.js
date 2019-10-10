@@ -8,7 +8,7 @@ module.exports = gql`
 
   extend type Mutation {
     addProduct(productFields: ProductFields): Product!
-    updateProduct(id: ID!): Product!
+    updateProduct(id: ID!, productFields: ProductFields): Product!
     deleteProduct(id: ID!): String
   }
 
@@ -22,7 +22,7 @@ module.exports = gql`
     description: String!
     price: Float!
     image: String    
-    category: Category!
+    category: Category
     createdAt: String!
     updatedAt: String!
   }
@@ -32,6 +32,6 @@ module.exports = gql`
     description: String!
     price: Float!
     image: String    
-    category: ID!
+    categoryId: ID!
   }
 `

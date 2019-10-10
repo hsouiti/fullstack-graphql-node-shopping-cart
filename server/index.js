@@ -14,10 +14,10 @@ process.env.NODE_ENV === 'development'
 (async () => {
   try {
     mongoose.connect(process.env.MONGODB_CONNECTION,
-      { 
+      {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        useFindAndModify: false 
+        useFindAndModify: false
       })
     const server = new ApolloServer({
       typeDefs,
