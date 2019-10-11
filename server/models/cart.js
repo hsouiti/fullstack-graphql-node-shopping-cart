@@ -11,6 +11,7 @@ const cartSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Product'
       },
+      price: Number,
       quantity: {
         type: Number,
         default: 1
@@ -21,11 +22,7 @@ const cartSchema = new Schema({
     type: Number,
     default: 0
   }
-
-
 }, { timestamps: true })
 
 const Cart = model('Cart', cartSchema)
 module.exports = Cart
-
-
