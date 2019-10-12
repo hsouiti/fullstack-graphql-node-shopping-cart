@@ -8,6 +8,7 @@ module.exports = gql`
 
   extend type Mutation {
     AddToCart(cartItems: CartItems): Cart!
+    removeFromCart(cartItems: CartItems): Cart
   }
 
   type Cart {
@@ -28,6 +29,5 @@ module.exports = gql`
     userId: ID!
     productId: ID!
     quantity: Int!
-    price: Float!
   }
 `
