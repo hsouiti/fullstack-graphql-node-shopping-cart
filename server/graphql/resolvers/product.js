@@ -57,7 +57,7 @@ module.exports = {
     },
     deleteProduct: async (_, { id }, { req }) => {
       // TODO: Delete the product from category first
-
+      // delete product from cart if exist
       // Check if user authenticated
       await isLoggedIn(req)
       try {
