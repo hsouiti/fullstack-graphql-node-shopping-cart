@@ -1,3 +1,4 @@
+const http = require('http')
 const express = require('express')
 const { ApolloServer, gql, PubSub } = require('apollo-server-express')
 const mongoose = require('mongoose')
@@ -10,6 +11,7 @@ const pubsub = new PubSub()
 process.env.NODE_ENV === 'development'
   ? process.env.MONGODB_CONNECTION = process.env.MONGODB_LOCAL
   : process.env.MONGODB_CONNECTION = process.env.MONGODB_URI;
+const PORT = process.env.ENV_PORT;
 
 (async () => {
   try {
@@ -22,19 +24,21 @@ process.env.NODE_ENV === 'development'
     const server = new ApolloServer({
       typeDefs,
       resolvers,
-      context: ({ req }) => ({ req, pubsub })
+      context: ({ req, res }) => ({ req, res, pubsub })
     })
 
-    const app = express()
+    const app = express();
     server.applyMiddleware({ app })
 
-    app.listen({ port: 3000 },
-      () => console.log(`server running at http://localhost:3000${server.graphqlPath}`)
-    )
-  } catch (err) {
-    console.log("Setting up failed to connect", err.message)
-  }
+    const httpServer = http.createServer(app);
+    server.installSubscriptionHandlers(httpServer);
 
+    httpServer.listen(PORT, () => {
+      console.log(`server running at http://localhost:${PORT}${server.graphqlPath}`)
+    })
+  } catch (err) {
+    console.log("Failed to connect :", err.message)
+  }
 })()
 
 
