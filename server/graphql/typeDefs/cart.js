@@ -11,6 +11,10 @@ module.exports = gql`
     removeFromCart(cartItems: CartItems): Cart
   }
 
+  extend type Subscription {
+    productAdded: Product!
+  }
+
   type Cart {
     id: ID!
     user: User!

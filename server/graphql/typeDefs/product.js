@@ -11,11 +11,7 @@ module.exports = gql`
     updateProduct(id: ID!, productFields: ProductFields): Product!
     deleteProduct(id: ID!): String
   }
-
-  extend type Subscription {
-    newProduct: Product!
-  }
-
+  
   type Product {
     id: ID!
     name: String!

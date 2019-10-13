@@ -1,5 +1,4 @@
 const { UserInputError } = require('apollo-server-express')
-
 const Cart = require('../../models/cart')
 const Product = require('../../models/product')
 const User = require('../../models/user')
@@ -34,7 +33,7 @@ module.exports = {
     }
   },
   Mutation: {
-    AddToCart: async (_, { cartItems }, { req }) => {
+    AddToCart: async (_, { cartItems }, { req, pubsub }) => {
       try {
         const cart = await Cart.findOne({ userId: cartItems.userId })
         if (cart) {
@@ -45,6 +44,10 @@ module.exports = {
               const newItems = cart.items.filter(item => item.id === cartItems.id)
               cart.items = newItems
             }
+            //TODO:
+            pubsub.publish('PRODUCT_ADDED', {
+              productAdded: await Product.findOne({ _id: cartItems.productId })
+            })
             cart.save()
           } else {
             const product = await Product.findOne({ _id: cartItems.productId })
@@ -54,6 +57,7 @@ module.exports = {
                 quantity: cartItems.quantity,
                 price: product.price
               })
+              pubsub.publish('PRODUCT_ADDED', { productAdded: product })
               cart.save()
             }
           }
@@ -69,12 +73,13 @@ module.exports = {
                 price: product.price
               }
             })
+            const itemcart = { product, quantity: cartItems.quantity }
+            console.log("herre product ", product)
+            pubsub.publish('PRODUCT_ADDED', { productAdded: product })
             await newCart.save()
             return newCart
           }
-
         }
-
       } catch (err) {
         throw new UserInputError(err)
       }
@@ -99,6 +104,11 @@ module.exports = {
       } catch (err) {
         throw new UserInputError(err)
       }
+    }
+  },
+  Subscription: {
+    productAdded: {
+      subscribe: (_, __, { pubsub }) => pubsub.asyncIterator('PRODUCT_ADDED')
     }
   }
 }
