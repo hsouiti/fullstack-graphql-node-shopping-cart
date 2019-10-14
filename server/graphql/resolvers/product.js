@@ -10,7 +10,7 @@ module.exports = {
     getProduct: async (_, { id }, { req }) => {
       return Product.findById(id)
     },
-    getProducts: async (_, __, { req }) => {
+    getProducts: async (_, { first }, { req }) => {
       try {
         return await Product.find({}).sort({ createdAt: -1 })
       } catch (err) {
