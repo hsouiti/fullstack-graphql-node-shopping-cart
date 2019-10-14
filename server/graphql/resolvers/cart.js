@@ -44,7 +44,6 @@ module.exports = {
               const newItems = cart.items.filter(item => item.id === cartItems.id)
               cart.items = newItems
             }
-            //TODO:
             pubsub.publish('PRODUCT_ADDED', {
               productAdded: await Product.findOne({ _id: cartItems.productId })
             })
@@ -74,7 +73,6 @@ module.exports = {
               }
             })
             const itemcart = { product, quantity: cartItems.quantity }
-            console.log("herre product ", product)
             pubsub.publish('PRODUCT_ADDED', { productAdded: product })
             await newCart.save()
             return newCart
