@@ -35,6 +35,7 @@ const PORT = process.env.ENV_PORT;
 
     httpServer.listen(PORT, () => {
       console.log(`server running at http://localhost:${PORT}${server.graphqlPath}`)
+
     })
   } catch (err) {
     console.log("Failed to connect :", err.message)

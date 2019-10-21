@@ -1,12 +1,10 @@
-import React from 'react';
-import logo from './logo.svg';
+import React from 'react'
+import AppRouter from './routers/AppRouter'
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Home</h1>
-    </div>
+    <AppRouter />
   );
 }
 
